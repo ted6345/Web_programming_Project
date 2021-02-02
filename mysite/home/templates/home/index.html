@@ -1,1 +1,46 @@
-홈 화면 입니다.
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Pexels 121</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    </head>
+    <body>
+        <nav class = "nav-bar">
+            <a class="nav-bar-a" href="">
+                <div class="nav-bar-a-logo">
+                    로고
+                </div>
+                <div class="nav-bar-a-text">
+                    이름
+                </div>
+            </a>
+            <form>
+                <div class="search-bar_container">
+                    <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required" type="search" value/>
+                    <button id="search-action" title="스톡 사진 검색"></button>
+                    <ul>
+                        <li><a href="">로그인</a></li>
+                    </ul>
+                </div>
+            </form>
+        </nav>
+
+        <header>
+            <div class="hero">
+                히어로 섹션
+            </div>
+        </header>
+
+        <body>
+            <div class = "container">
+                이미지
+            </div>
+        </body>
+
+        <footer>
+        </footer>
+
+        <script src="{% static 'javascript/index.js' %}"></script>
+    </body>
+</html>
