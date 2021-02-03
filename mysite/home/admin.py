@@ -1,3 +1,5 @@
 from django.contrib import admin
+from home.models import Member, Search
 
-# Register your models here.
+admin.site.register(Member)
+admin.site.register(Search)
