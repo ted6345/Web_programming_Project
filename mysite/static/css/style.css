@@ -1,18 +1,19 @@
 body {
     margin: 0;
+    height: 100%;
 }
 .nav-bar {
     background: lightblue;
 
     padding: 0 16px;
 
-    width: 1280px;
     min-height: 66px;
     z-index: 30;
 
     position: fixed;
     left: 0;
     top: 0;
+    right: 0;
 
     display: flex;
 }
@@ -58,7 +59,7 @@ body {
     background: antiquewhite;
 
     padding: 74px 16px 66px;
-
+    height: 100%;
     max-height: 500px;
     min-height: 380px;
 

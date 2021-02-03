@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Pexels 121</title>
+        <title>Pexels 121</title>]
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     </head>
+
     <body>
         <nav class = "nav-bar">
             <a class="nav-bar-a" href="">
@@ -16,31 +17,30 @@
                     이름
                 </div>
             </a>
-            <form>
-                <div class="search-bar_container">
-                    <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required" type="search" value/>
-                    <button id="search-action" title="스톡 사진 검색"></button>
-                    <ul>
-                        <li><a href="">로그인</a></li>
-                    </ul>
-                </div>
+            {% block search %}
+            <form action="{% url 'home:search:index' %}" method="post">
+            {% csrf_token %}
+                <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required" type="search" name="search_content" value="{{ text }}"/>
+                <button id="search-action" title="스톡 사진 검색" type="submit" value="검색"></button>
             </form>
+            {% endblock %}
         </nav>
 
+        {% block header %}
         <header>
             <div class="hero">
                 히어로 섹션
             </div>
         </header>
+        {% endblock %}
 
-        <body>
+        {% block main %}
+        <main>
             <div class = "container">
-                이미지
+                이미지들이 좌르륵!
             </div>
-        </body>
-
-        <footer>
-        </footer>
+        </main>
+        {% endblock %}
 
         <script src="{% static 'javascript/index.js' %}"></script>
     </body>
