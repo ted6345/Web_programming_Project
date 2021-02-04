@@ -11,14 +11,19 @@ def index(request):
 
         if form.is_valid():
             searched_content = form.cleaned_data['search_content']
-
-            lastest = Search.objects.all().order_by('-id')[:1]
-
             model_search = Search()
             model_search.content = searched_content
-            model_search.id = lastest.values_list()[0][0] + 1
-            model_search.save()
 
+            try:
+                lastest = Search.objects.all().order_by('-id')[:1]
+                model_search.id = lastest.values_list()[0][0] + 1
+            except IndexError:
+                model_search.id = 1
+            else:
+                model_search.id = lastest.values_list()[0][0] + 1
+
+            model_search.save()
             return HttpResponseRedirect(reverse('home:search:index'))
     else:
-        return render(request, "home/index.html")
+        lastest = Search.objects.all().order_by('-id')[:1]
+        return render(request, "search/index.html")

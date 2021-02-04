@@ -3,7 +3,8 @@ from django.db import models
 class Search(models.Model):
     id = models.IntegerField(primary_key=True)
     content = models.CharField(max_length=100)
-    # date = models.DateTimeField()
+    searched_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.content
+        template = '{0.id}, {0.content}, {0.searched_at}'
+        return template.format(self)
