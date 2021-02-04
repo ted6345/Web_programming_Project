@@ -1,47 +1,80 @@
 {% load static %}
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Pexels 121</title>]
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
-    </head>
+<head>
+    <meta charset="utf-8"/>
+    <title>Pexels 121</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
+</head>
 
-    <body>
-        <nav class = "nav-bar">
-            <a class="nav-bar-a" href="">
-                <div class="nav-bar-a-logo">
-                    로고
-                </div>
-                <div class="nav-bar-a-text">
-                    이름
-                </div>
-            </a>
-            {% block search %}
-            <form action="{% url 'home:search:index' %}" method="post">
-            {% csrf_token %}
-                <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required" type="search" name="search_content" value="{{ text }}"/>
-                <button id="search-action" title="스톡 사진 검색" type="submit" value="검색"></button>
-            </form>
-            {% endblock %}
-        </nav>
+<body>
+<nav class="nav-bar">
+    <a class="nav-bar-a" href="">
+        <div class="nav-bar-a-logo">
+            로고
+        </div>
+        <div class="nav-bar-a-text">
+            Pexels121
+        </div>
 
-        {% block header %}
-        <header>
-            <div class="hero">
-                히어로 섹션
+    </a>
+
+    <!--        {% block search %}-->
+    <!--        <form action="{% url 'home:search:index' %}" method="post">-->
+    <!--            {% csrf_token %}-->
+    <!--            <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required"-->
+    <!--                   type="search" name="search_content" value="{{ text }}"/>-->
+    <!--            <button id="search-action" title="스톡 사진 검색" type="submit" value="검색"></button>-->
+    <!--        </form>-->
+    <!--        {% endblock %}-->
+</nav>
+
+
+{% block header %}
+<header class="hero">
+
+    <div class="hero__background">
+        <img src="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1400">
+        <!--             srcset="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=350 350w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=500 500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1000 1000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1500 1500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2000 2000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2500 2500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3000 3000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3500 3500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=4000 4000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=5000 5000w">-->
+    </div>
+
+
+    <section class="hero__content hero__content--centered">
+        <h1 class="hero__title">The best free stock photos &amp; videos shared by talented creators.</h1>
+
+        <!--TODO1: 검색창 기능 및 DB에 연동, 성진님과 조율-->
+        <div class="hero__search-container">
+            <div class="search-bar_container">
+                <form action="{% url 'home:search:index' %}" method="post">
+
+                    <input autocapitalize="none" autocomplete="off" autofocus="" id="search" name="s"
+                           placeholder="Search for free photos" type="search" value="">
+
+                    <button data-track-action="hero" data-track-label="searchicon" id="search-action" title="Search">
+                        <i class="rd__svg-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
+                        </i>
+                    </button>
+                </form>
             </div>
-        </header>
-        {% endblock %}
+        </div>
+    </section>
+</header>
+{% endblock %}
 
-        {% block main %}
-        <main>
-            <div class = "container">
-                이미지들이 좌르륵!
-            </div>
-        </main>
-        {% endblock %}
+{% block main %}
+<main>
+    <div class="container">
+        <div class="gallery">
 
-        <script src="{% static 'javascript/index.js' %}"></script>
-    </body>
+        </div>
+        <a class="load-more" data-img="curated">Load More</a>
+    </div>
+</main>
+{% endblock %}
+
+<script src="{% static 'javascript/index.js' %}"></script>
+</body>
 </html>
