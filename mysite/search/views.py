@@ -8,9 +8,6 @@ from .models import SearchHistory
 CURRENT_USER = 'gilbert'  # 현재 사용자 아이디
 
 def index(request):
-
-
-
     if request.method == 'POST': # Post request
         form = SearchForm(request.POST, request.FILES)
         print(form)
@@ -42,6 +39,6 @@ def index(request):
 def history(request):
     search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER)
 
-    context= {'search_history' : search_history, 'searcher_id': CURRENT_USER}
-    print(context)
+    context= {'search_history' : search_history}
+    # print(context)
     return render(request, "search/history.html", context)

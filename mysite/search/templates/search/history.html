@@ -2,20 +2,30 @@
 
 {% block header %}{% endblock %}
 
-
-
 {% block main %}
-<main>
-    <div class = "container-search" style="position: fixed; top: 66px; max-width: 1400px; min-height: 1500px;">
-        - 검색 기록 -
-        {% if search_history %}
-            <h1>아이디 : {{ searcher_id}}</h1>
-            <ol>
-            {% for i in search_history %}
-                <li>{{ i.content }}, {{ i.searched_at }}</li>
-            {% endfor %}
-            </ol>
-        {% endif %}
-    </div>
-</main>
+<div class = "container-search" style="position: fixed; top: 66px; width: 100%; min-height: 1500px;">
+    {% if search_history %}
+    <table class="history_table">
+      <thead>
+      <tr>
+        <th scope="cols">번호</th>
+        <th scope="cols">검색 내용</th>
+        <th scope="cols">아이디</th>
+        <th scope="cols">날짜</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for i in search_history %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+{#      검색 내용을 누르면 다시 검색하기 #}
+        <td><a href="">{{ i.content }}</a></td>
+        <td>{{ i.searcher_id }}</td>
+        <td>{{ i.searched_at|date:"Y-m-d H:i:s"}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+</div>
 {% endblock %}
