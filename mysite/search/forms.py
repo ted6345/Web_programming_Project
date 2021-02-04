@@ -1,4 +1,7 @@
 from django import forms
+from .models import SearchHistory
 
-class SearchForm(forms.Form):
-    search_content = forms.CharField(max_length=100)
+class SearchForm(forms.ModelForm):
+    class Meta:
+        model = SearchHistory
+        fields = ('content',)

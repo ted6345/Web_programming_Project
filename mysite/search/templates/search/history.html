@@ -1,0 +1,21 @@
+{% extends "home/index.html" %}
+
+{% block header %}{% endblock %}
+
+
+
+{% block main %}
+<main>
+    <div class = "container-search" style="position: fixed; top: 66px; max-width: 1400px; min-height: 1500px;">
+        - 검색 기록 -
+        {% if search_history %}
+            <h1>아이디 : {{ searcher_id}}</h1>
+            <ol>
+            {% for i in search_history %}
+                <li>{{ i.content }}, {{ i.searched_at }}</li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

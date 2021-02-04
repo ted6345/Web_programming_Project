@@ -125,9 +125,11 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_L10N = True
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-USE_TZ = True
+USE_L10N = False
+
+USE_TZ = False # 한국시간을 models의 DATETIME에 적용하려면 False로 설정
 
 
 # Static files (CSS, JavaScript, Images)

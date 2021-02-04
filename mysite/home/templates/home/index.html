@@ -9,7 +9,7 @@
 
     <body>
         <nav class = "nav-bar">
-            <a class="nav-bar-a" href="">
+            <a class="nav-bar-a" href="{% url 'home:index' %}">
                 <div class="nav-bar-a-logo">
                     로고
                 </div>
@@ -24,6 +24,7 @@
                 <button id="search-action" title="스톡 사진 검색" type="submit" value="검색"></button>
             </form>
             {% endblock %}
+            <a href="{% url 'home:search:history' %}">검색 기록</a>
         </nav>
 
         {% block header %}

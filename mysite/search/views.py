@@ -5,25 +5,43 @@ from django.urls import reverse
 from .forms import SearchForm
 from .models import SearchHistory
 
-def index(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
+CURRENT_USER = 'gilbert'  # 현재 사용자 아이디
 
+def index(request):
+
+
+
+    if request.method == 'POST': # Post request
+        form = SearchForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
-            searched_content = form.cleaned_data['search_content']
-            model_search = SearchHistory()
-            model_search.content = searched_content
+            post = form.save(commit=False)
+
+            post.content = form.data['search_content']
+
+            # post.searcher_id = "gildong"
 
             try:
                 lastest = SearchHistory.objects.all().order_by('-id')[:1]
-                model_search.id = lastest.values_list()[0][0] + 1
+                post.id = lastest.values_list()[0][0] + 1
             except IndexError:
-                model_search.id = 1
+                post.id = 1
             else:
-                model_search.id = lastest.values_list()[0][0] + 1
+                post.id = lastest.values_list()[0][0] + 1
 
-            model_search.save()
+            post.save()
+
             return HttpResponseRedirect(reverse('home:search:index'))
-    else:
-        lastest = SearchHistory.objects.all().order_by('-id')[:1]
+        else:
+            print("form is not valid")
+            return render(request, "search/index.html")
+
+    else: # Get request, ...
         return render(request, "search/index.html")
+
+def history(request):
+    search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER)
+
+    context= {'search_history' : search_history, 'searcher_id': CURRENT_USER}
+    print(context)
+    return render(request, "search/history.html", context)
