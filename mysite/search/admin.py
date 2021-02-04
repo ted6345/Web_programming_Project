@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from search.models import Search
+from .models import SearchHistory
 
-admin.site.register(Search)
+admin.site.register(SearchHistory)

@@ -1,6 +1,6 @@
 from django.db import models
 
-class Search(models.Model):
+class SearchHistory(models.Model):
     id = models.IntegerField(primary_key=True)
     content = models.CharField(max_length=100)
     searched_at = models.DateTimeField(auto_now_add=True)

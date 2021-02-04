@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from home.forms import SearchForm
 
-from search.models import Search
+from .forms import SearchForm
+from .models import SearchHistory
 
 def index(request):
     if request.method == 'POST':
@@ -11,11 +11,11 @@ def index(request):
 
         if form.is_valid():
             searched_content = form.cleaned_data['search_content']
-            model_search = Search()
+            model_search = SearchHistory()
             model_search.content = searched_content
 
             try:
-                lastest = Search.objects.all().order_by('-id')[:1]
+                lastest = SearchHistory.objects.all().order_by('-id')[:1]
                 model_search.id = lastest.values_list()[0][0] + 1
             except IndexError:
                 model_search.id = 1
@@ -25,5 +25,5 @@ def index(request):
             model_search.save()
             return HttpResponseRedirect(reverse('home:search:index'))
     else:
-        lastest = Search.objects.all().order_by('-id')[:1]
+        lastest = SearchHistory.objects.all().order_by('-id')[:1]
         return render(request, "search/index.html")
