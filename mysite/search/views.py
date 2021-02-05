@@ -16,7 +16,7 @@ def index(request):
 
             post.content = form.data['search_content']
 
-            # post.searcher_id = "gildong"
+            post.searcher_id = CURRENT_USER
 
             try:
                 lastest = SearchHistory.objects.all().order_by('-id')[:1]
@@ -37,8 +37,8 @@ def index(request):
         return render(request, "search/index.html")
 
 def history(request):
-    search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER)
+    search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at')[:5]
 
     context= {'search_history' : search_history}
-    # print(context)
+
     return render(request, "search/history.html", context)

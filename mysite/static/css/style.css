@@ -71,29 +71,6 @@ body {
     min-height: 1500px;
 }
 
-table.history_table {
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  margin: 20px 10px;
-}
-table.history_table thead th {
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  color: #fff;
-  background: #e7708d;
-  margin: 20px 10px;
-}
-table.history_table tbody th {
-  padding: 10px;
-}
-table.history_table td {
-  padding: 10px;
-  vertical-align: top;
-}
-table.history_table .even {
-  background: #fdf3f5;
+.lastest-5-content {
+    background-color: rgb(232, 232, 232);
 }
