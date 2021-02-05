@@ -2,21 +2,25 @@
 // var lastScrollTop = 0;
 // var delta = 5;
 // var navbarHeight = $('nav').outerHeight();
- nav_searchbar =document.querySelector('.search-bar_container2') ;
- hero_searchbar = document.querySelector('.search-bar_container');
+nav = document.querySelector('.nav-bar');
+nav_searchbar = document.querySelector('.search-bar_container2');
+hero_searchbar = document.querySelector('.search-bar_container');
+topDropDown = document.querySelector('#search-bar-dropdown_recent_searches2');
 
 $(window).scroll(function (event) {
     didScroll = true;
     var st = $(this).scrollTop();
     console.log($(this).scrollTop());
     if(st > 300){
-       nav_searchbar.style.visibility = 'visible';
-       hero_searchbar.style.visibility = 'hidden';
-
+        nav.style.backgroundColor = 'rgb(35, 42, 52)';
+        nav_searchbar.style.visibility = 'visible';
+        hero_searchbar.style.visibility = 'hidden';
     }
     else{
-       nav_searchbar.style.visibility = 'hidden';
-       hero_searchbar.style.visibility = 'visible';
+        topDropDown.style.visibility = 'hidden';
+        nav.style.backgroundColor = 'transparent';
+        nav_searchbar.style.visibility = 'hidden';
+        hero_searchbar.style.visibility = 'visible';
     }
 
 });

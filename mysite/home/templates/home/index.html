@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Pexels 121</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now "U" %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -11,30 +11,41 @@
 
 <body>
 <nav class="nav-bar">
-    <a class="nav-bar-a" href="">
-        <div class="nav-bar-a-logo">
-            로고
+    <a class="nav-bar-a" href=" {% url 'home:index' %}">
+        <div>
+            <img class="nav-bar-a-logo" src="{% static 'assets/logo-free.png' %}"/>
         </div>
-        <div class="nav-bar-a-text">
-            Pexels121
+        <div>
+            <h1 class="nav-bar-a-text">121</h1>
         </div>
     </a>
 
-    <div class="search-bar_container2">
-        <form action="{% url 'home:search:index' %}" method="post">
-            <input autocapitalize="none" autocomplete="off" id="search" name="s"
-                   placeholder="Search for free photos" required="required" type="search" value="">
-            <button id="search-action" title="Search for stock photos">
-                <i class="rd__svg-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                    </svg>
-                </i>
-            </button>
-        </form>
-    </div>
+        <div class="hero__search-container2">
+            <form class="form-search2" action="{% url 'home:search:index' %}" method="post">
+            {% csrf_token %}
+                <div class="search-bar_container2">
+                    <input class="search-bar_input2" autocapitalize="none" autocomplete="off" required="required" id="search" name="s"
+                           placeholder="Search for free photos" type="search" value="">
+                    <button class="search-bar_btn2" data-track-label="searchicon" id="search-action" title="Search">
+                        <i class="rd__svg-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
+                        </i>
+                    </button>
+                </div>
+                <div class="search-bar-dropdown2">
+                    <div class="search-bar-dropdown_element2">
+                        <div id="search-bar-dropdown_recent_searches2" style="visibility: hidden">
+                            <div class="search-bar__dropdown__section__title2">최근 검색</div>
+                            <div class="search-bar__dropdown__section__content2">호랑이, 사자</div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-
+    <a class="login" href=""><div>Login</div></a>
 </nav>
 
 
@@ -52,21 +63,28 @@
 
         <!--TODO1: 검색창 기능 및 DB에 연동, 성진님과 조율-->
         <div class="hero__search-container">
-            <div class="search-bar_container">
-                <form action="{% url 'home:search:index' %}" method="post">
-
-                    <input autocapitalize="none" autocomplete="off" autofocus="" id="search" name="s"
+            <form class="form-search" action="{% url 'home:search:index' %}" method="post">
+            {% csrf_token %}
+                <div class="search-bar_container">
+                    <input class="search-bar_input" autocapitalize="none" autocomplete="off" required="required" id="search" name="s"
                            placeholder="Search for free photos" type="search" value="">
-
-                    <button data-track-action="hero" data-track-label="searchicon" id="search-action" title="Search">
+                    <button class="search-bar_btn" data-track-label="searchicon" id="search-action" title="Search">
                         <i class="rd__svg-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                             </svg>
                         </i>
                     </button>
-                </form>
-            </div>
+                </div>
+                <div class="search-bar-dropdown">
+                    <div class="search-bar-dropdown_element">
+                        <div id="search-bar-dropdown_recent_searches" style="visibility: hidden">
+                            <div class="search-bar__dropdown__section__title">최근 검색</div>
+                            <div class="search-bar__dropdown__section__content">호랑이, 사자</div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 </header>

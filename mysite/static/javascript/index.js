@@ -1,9 +1,20 @@
+// 드롭다운을 위한 변수 설정
+const formSearch = document.querySelector('.form-search');
+const searchBarDropDown = document.querySelector('#search-bar-dropdown_recent_searches');
+const searchBar = document.querySelector('.search-bar_input');
+const searchBtn = document.querySelector('.search-bar_btn')
+
+const formSearch2 = document.querySelector('.form-search2');
+const searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
+const searchBar2 = document.querySelector('.search-bar_input2');
+const searchBtn2 = document.querySelector('.search-bar_btn2')
+
 class PhotoGallery{
   constructor(){
     this.API_KEY = '563492ad6f917000010000019cb12da4f7db4d378977abb471d25982';
     this.galleryDIv = document.querySelector('.gallery');
-    this.searchForm = document.querySelector('.search-bar_container form');
-    this.searchForm2 = document.querySelector('.search-bar_container2 form');
+    this.searchForm = document.querySelector('.form-search');
+    this.searchForm2 = document.querySelector('.form-search2');
 
 
     this.loadMore = document.querySelector('.load-more');
@@ -22,7 +33,7 @@ class PhotoGallery{
     });
     this.searchForm2.addEventListener('submit', (e)=>{
       this.pageIndex = 1;
-      this.getSearchedImages(e);
+      this.getSearchedImages2(e);
     });
     this.loadMore.addEventListener('click', (e)=>{
       this.loadMoreImages(e);
@@ -35,7 +46,7 @@ class PhotoGallery{
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
-    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=12`;
+    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=24`;
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos)
     console.log(data)
@@ -69,16 +80,37 @@ class PhotoGallery{
     this.loadMore.setAttribute('data-img', 'search');
     e.preventDefault();
     this.galleryDIv.innerHTML='';
-    const searchValue = e.target.querySelector('input').value;
+    searchBarDropDown.style.visibility = "hidden";
+    searchBar.style.borderBottomLeftRadius = "6px";
+    searchBtn.style.borderBottomRightRadius = "6px";
+    const searchValue = e.target.querySelector('.search-bar_input').value;
+
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=12`
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
+    const data = await this.fetchImages(baseURL);
+    this.GenerateHTML(data.photos);
+    e.target.reset();
+  }
+  async getSearchedImages2(e){
+    this.loadMore.setAttribute('data-img', 'search');
+    e.preventDefault();
+    this.galleryDIv.innerHTML='';
+
+    const searchValue = e.target.querySelector('.search-bar_input2').value;
+
+    searchBarDropDown2.style.visibility = "hidden";
+    searchBar2.style.borderBottomLeftRadius = "6px";
+    searchBtn2.style.borderBottomRightRadius = "6px";
+
+    this.searchValueGlobal = searchValue;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos);
     e.target.reset();
   }
   async getMoreSearchedImages(index){
     // console.log(searchValue)
-    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=12`
+    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=24`
     const data = await this.fetchImages(baseURL);
     console.log(data)
     this.GenerateHTML(data.photos);
@@ -95,5 +127,36 @@ class PhotoGallery{
     }
   }
 }
+
+// 드롭다운을 위한 함
+function getEvent() {
+    window.addEventListener('click', function(e){
+      if (formSearch.contains(e.target)){
+        searchBarDropDown.style.visibility = "visible";
+        searchBar.style.borderBottomLeftRadius = "0";
+        searchBtn.style.borderBottomRightRadius = "0";
+        searchBar.style.borderBottom = "1px solid grey";
+        searchBtn.style.borderBottom = "1px solid grey";
+      } else {
+        searchBarDropDown.style.visibility = "hidden";
+        searchBar.style.borderBottomLeftRadius = "6px";
+        searchBtn.style.borderBottomRightRadius = "6px";
+      }
+
+      if (formSearch2.contains(e.target)){
+        searchBarDropDown2.style.visibility = "visible";
+        searchBar2.style.borderBottomLeftRadius = "0";
+        searchBtn2.style.borderBottomRightRadius = "0";
+        searchBar2.style.borderBottom = "1px solid grey";
+        searchBtn2.style.borderBottom = "1px solid grey";
+      } else {
+        searchBarDropDown2.style.visibility = "hidden";
+        searchBar2.style.borderBottomLeftRadius = "6px";
+        searchBtn2.style.borderBottomRightRadius = "6px";
+      }
+    })
+}
+
+getEvent()
 
 const gallery = new PhotoGallery;
