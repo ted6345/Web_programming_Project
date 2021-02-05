@@ -3,6 +3,9 @@ class PhotoGallery{
     this.API_KEY = '563492ad6f917000010000019cb12da4f7db4d378977abb471d25982';
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.search-bar_container form');
+    this.searchForm2 = document.querySelector('.search-bar_container2 form');
+
+
     this.loadMore = document.querySelector('.load-more');
     // this.logo = document.querySelector('.logo')
     this.pageIndex = 1;
@@ -14,6 +17,10 @@ class PhotoGallery{
       this.getImg(1);
     });
     this.searchForm.addEventListener('submit', (e)=>{
+      this.pageIndex = 1;
+      this.getSearchedImages(e);
+    });
+    this.searchForm2.addEventListener('submit', (e)=>{
       this.pageIndex = 1;
       this.getSearchedImages(e);
     });

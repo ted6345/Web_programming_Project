@@ -5,6 +5,8 @@
     <title>Pexels 121</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -16,17 +18,23 @@
         <div class="nav-bar-a-text">
             Pexels121
         </div>
-
     </a>
 
-    <!--        {% block search %}-->
-    <!--        <form action="{% url 'home:search:index' %}" method="post">-->
-    <!--            {% csrf_token %}-->
-    <!--            <input autocapitalize="none" autocomplete="off" id="search" placeholder="무료 사진 검색" required="required"-->
-    <!--                   type="search" name="search_content" value="{{ text }}"/>-->
-    <!--            <button id="search-action" title="스톡 사진 검색" type="submit" value="검색"></button>-->
-    <!--        </form>-->
-    <!--        {% endblock %}-->
+    <div class="search-bar_container2">
+        <form action="{% url 'home:search:index' %}" method="post">
+            <input autocapitalize="none" autocomplete="off" id="search" name="s"
+                   placeholder="Search for free photos" required="required" type="search" value="">
+            <button id="search-action" title="Search for stock photos">
+                <i class="rd__svg-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                    </svg>
+                </i>
+            </button>
+        </form>
+    </div>
+
+
 </nav>
 
 
@@ -76,5 +84,7 @@
 {% endblock %}
 
 <script src="{% static 'javascript/index.js' %}"></script>
+<script src="{% static 'javascript/scroll.js' %}"></script>
+
 </body>
 </html>
