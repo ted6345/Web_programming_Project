@@ -305,6 +305,15 @@ div {
     text-align: left;
     z-index: 28;
 }
+.search-bar__dropdown__section__content {
+    display: flex;
+}
+.search-bar__dropdown__section__content div {
+    border: solid black 1px;
+    margin-right: 10px;
+    width: 30px;
+}
+
 
 
 /*이미지 갤러리 파트*/
