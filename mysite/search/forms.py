@@ -1,12 +1,12 @@
 from django import forms
-from .models import SearchHistory, ImageHistory
+from .models import SearchHistory
 
 class HeroSearchForm(forms.ModelForm):
     class Meta:
         model = SearchHistory
         fields = ('content',)
 
-class NavSearchForm(forms.ModelForm):
-    class Meta:
-        model = ImageHistory
-        fields = ('image',)
+# class NavSearchForm(forms.ModelForm):
+#     class Meta:
+#         model = SearchHistory
+#         fields = ('content',)

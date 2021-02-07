@@ -10,110 +10,107 @@
 </head>
 
 <body>
-<nav class="nav-bar">
-    <a class="nav-bar-a" href=" {% url 'home:index' %}">
-        <div>
-            <img class="nav-bar-a-logo" src="{% static 'assets/logo-free.png' %}"/>
-        </div>
-        <div>
-            <h1 class="nav-bar-a-text">121</h1>
-        </div>
-    </a>
+    <nav class="nav-bar">
+        <a class="nav-bar-a" href=" {% url 'home:index' %}">
+            <div>
+                <img class="nav-bar-a-logo" src="{% static 'assets/logo-free.png' %}"/>
+            </div>
+            <div>
+                <h1 class="nav-bar-a-text">121</h1>
+            </div>
+        </a>
 
-        <div class="hero__search-container2">
-            <form class="form-search2" action="{% url 'home:search:index' %}" method="post">
-            {% csrf_token %}
-                <div class="search-bar_container2">
-                    <input class="search-bar_input2" autocapitalize="none" autocomplete="off" required="required" id="search"
-                           placeholder="Search for free photos" type="search" name="search_content" value="{{ text }}">
-                    <button class="search-bar_btn2" data-track-label="searchicon" id="search-action" title="Search" type="submit">
-                        <i class="rd__svg-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                            </svg>
-                        </i>
-                    </button>
-                </div>
-                <div class="search-bar-dropdown2">
-                    <div class="search-bar-dropdown_element2">
-                        <div id="search-bar-dropdown_recent_searches2" style="visibility: hidden">
-                            <div class="search-bar__dropdown__section__title2"><h1>최근 검색</h1></div>
-                            <div class="search-bar__dropdown__section__content2">
-                                <div>1</div>
-                                <div>2</div>
-                                <div>3</div>
-                                <div>4</div>
-                                <div>5</div>
+            <div class="hero__search-container2">
+                <form class="form-search2">
+                {% csrf_token %}
+                    <div class="search-bar_container2" {% block nav-searchbar %}style="visibility: hidden"{% endblock %}>
+                        <input class="search-bar_input2" autocapitalize="none" autocomplete="off" required="required" id="search"
+                               placeholder="Search for free photos" type="search" name="search_content" value="{{ text }}">
+                        <button class="search-bar_btn2" data-track-label="searchicon" id="search-action" title="Search" type="submit">
+                            <i class="rd__svg-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </i>
+                        </button>
+                    </div>
+                    <div class="search-bar-dropdown2">
+                        <div class="search-bar-dropdown_element2">
+                            <div id="search-bar-dropdown_recent_searches2" style="visibility: hidden">
+                                <div class="search-bar__dropdown__section__title2"><h1>최근 검색</h1></div>
+                                <div class="search-bar__dropdown__section__content2">
+                                    {% if search_history %}
+                                            {% for i in search_history %}
+                                                <div class="lastest-5-content_{{ forloop.counter }}">{{ i.content }}</div>
+                                            {% endfor %}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    <a class="login" href=""><div>Login</div></a>
-</nav>
-
+                </form>
+            </div>
+        <a class="login" href=""><div>Login</div></a>
+    </nav>
 
 {% block header %}
-<header class="hero">
+    <header class="hero">
 
-    <div class="hero__background">
-        <img src="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1400">
-        <!--             srcset="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=350 350w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=500 500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1000 1000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1500 1500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2000 2000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2500 2500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3000 3000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3500 3500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=4000 4000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=5000 5000w">-->
-    </div>
+        <div class="hero__background">
+            <img src="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1400">
+            <!--             srcset="https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=350 350w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=500 500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1000 1000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=1500 1500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2000 2000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=2500 2500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3000 3000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=3500 3500w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=4000 4000w,https://images.pexels.com/photos/5639627/pexels-photo-5639627.jpeg?auto=compress&amp;crop=focalpoint&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.5&amp;h=500&amp;sharp=10&amp;w=5000 5000w">-->
+        </div>
 
+        <section class="hero__content hero__content--centered">
+            <h1 class="hero__title">The best free stock photos &amp; videos shared by talented creators.</h1>
 
-    <section class="hero__content hero__content--centered">
-        <h1 class="hero__title">The best free stock photos &amp; videos shared by talented creators.</h1>
-
-        <!--TODO1: 검색창 기능 및 DB에 연동, 성진님과 조율-->
-        <div class="hero__search-container">
-            <form class="form-search" action="{% url 'home:search:index' %}" method="post">
-            {% csrf_token %}
-                <div class="search-bar_container">
-                    <input class="search-bar_input" autocapitalize="none" autocomplete="off" required="required" id="search"
-                           placeholder="Search for free photos" type="search" name="search_content" value="{{ text }}">
-                    <button class="search-bar_btn" data-track-label="searchicon" id="search-action" title="Search" type="submit">
-                        <i class="rd__svg-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                            </svg>
-                        </i>
-                    </button>
-                </div>
-                <div class="search-bar-dropdown">
-                    <div class="search-bar-dropdown_element">
-                        <div id="search-bar-dropdown_recent_searches" style="visibility: hidden">
-                            <div class="search-bar__dropdown__section__title"><h1>최근 검색</h1></div>
-                            <div class="search-bar__dropdown__section__content">
-                                {% if search_history %}
-                                        {% for i in search_history %}
-                                            <div class="lastest-5-content">{{ i.content }}</div>
-                                        {% endfor %}
-                                {% endif %}
+            <!--TODO1: 검색창 기능 및 DB에 연동, 성진님과 조율-->
+            <div class="hero__search-container">
+                <form class="form-search" >
+                {% csrf_token %}
+                    <div class="search-bar_container">
+                        <input class="search-bar_input" autocapitalize="none" autocomplete="off" required="required" id="search" placeholder="Search for free photos" type="search" name="search_content" value="{{ text }}"/>
+                        <button class="search-bar_btn" data-track-label="searchicon" id="search-action" title="Search" type="submit">
+                            <i class="rd__svg-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </i>
+                        </button>
+                    </div>
+                    <div class="search-bar-dropdown">
+                        <div class="search-bar-dropdown_element">
+                            <div id="search-bar-dropdown_recent_searches" style="visibility: hidden">
+                                <div class="search-bar__dropdown__section__title"><h1>최근 검색</h1></div>
+                                <div class="search-bar__dropdown__section__content">
+                                    {% if search_history %}
+                                            {% for i in search_history %}
+                                                <div class="lastest-5-content_{{ forloop.counter }}">{{ i.content }}</div>
+                                            {% endfor %}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    </section>
-</header>
+                </form>
+            </div>
+        </section>
+    </header>
 {% endblock %}
 
 {% block main %}
-<main>
-    <div class="container">
-        <div class="gallery">
+    <main>
+        <div class="container">
+            <div class="gallery">
 
+            </div>
+            <a class="load-more" data-img="curated">Load More</a>
         </div>
-        <a class="load-more" data-img="curated">Load More</a>
-    </div>
-</main>
+    </main>
 {% endblock %}
 
 <script src="{% static 'javascript/index.js' %}"></script>
 <script src="{% static 'javascript/scroll.js' %}"></script>
-
+<script src="{% static 'javascript/dropdown.js' %}"></script>
 </body>
 </html>

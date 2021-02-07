@@ -33,7 +33,6 @@ body, html {
     display: flex;
 
     margin-top: 6.5px;
-    visibility: hidden;
     text-align: center;
 }
 .search-bar_container2 input {
@@ -305,10 +304,10 @@ div {
     text-align: left;
     z-index: 28;
 }
-.search-bar__dropdown__section__content {
+.search-bar__dropdown__section__content, .search-bar__dropdown__section__content2 {
     display: flex;
 }
-.search-bar__dropdown__section__content div {
+.search-bar__dropdown__section__content div, .search-bar__dropdown__section__content2 div {
     border: solid black 1px;
     margin-right: 10px;
     width: 30px;
