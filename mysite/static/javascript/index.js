@@ -4,7 +4,10 @@ class PhotoGallery{
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.form-search');
     this.searchForm2 = document.querySelector('.form-search2');
-
+    this.body = document.body;
+    this.header = document.querySelector('.hero');
+    this.nav = document.querySelector('.nav-bar');
+    this.nav_searchbar = document.querySelector('.search-bar_container2');
 
     this.loadMore = document.querySelector('.load-more');
     // this.logo = document.querySelector('.logo')
@@ -12,6 +15,14 @@ class PhotoGallery{
     this.searchValueGlobal = '';
     this.eventHandle();
   }
+  // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
+  fix () {
+    this.body.removeChild(this.header)
+    this.nav.classList.add('fix');
+    this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
+    this.nav_searchbar.style.visibility = 'visible';
+  }
+
   eventHandle(){
     document.addEventListener('DOMContentLoaded',()=>{
       this.getImg(1);
@@ -19,10 +30,14 @@ class PhotoGallery{
     this.searchForm.addEventListener('submit', (e)=>{
       this.pageIndex = 1;
       this.getSearchedImages(e);
+
+      this.fix();
     });
     this.searchForm2.addEventListener('submit', (e)=>{
       this.pageIndex = 1;
       this.getSearchedImages2(e);
+
+      this.fix();
     });
     this.loadMore.addEventListener('click', (e)=>{
       this.loadMoreImages(e);
@@ -77,9 +92,19 @@ class PhotoGallery{
     this.searchValueGlobal = searchValue;
     const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
     const data = await this.fetchImages(baseURL);
-    this.GenerateHTML(data.photos);
 
-    e.target.reset();
+    if (data.total_results >= 1) {
+      this.GenerateHTML(data.photos);
+      e.target.reset();
+    }
+    else {
+      this.container = document.querySelector('.container');
+      this.container.removeChild(this.loadMore);
+      this.container.innerHTML= `<div style="margin-top:50px">
+                                    <section><h1 class="error_msg">We Couldn't Find Anything For "${searchValue}"</h1></section>
+                                    <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>    
+                                 </div>`
+    }
 
     // 폼 데이터를 장고 뷰함수로 보내(POST) 최근 5개 데이터를 비동기로 리턴받도록 함
     this.postSearchData(searchValue);
@@ -131,9 +156,22 @@ class PhotoGallery{
     this.searchValueGlobal = searchValue;
     const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
     const data = await this.fetchImages(baseURL);
-    this.GenerateHTML(data.photos);
-    e.target.reset();
-    this.postSearchData(searchValue);
+
+
+    if (data.total_results >= 1) {
+      this.GenerateHTML(data.photos);
+      e.target.reset();
+    }
+    else {
+      this.container = document.querySelector('.container');
+      this.container.removeChild(this.loadMore);
+      this.container.innerHTML= `<div style="margin-top:50px">
+                                    <section><h1 class="error_msg">We Couldn't Find Anything For "${searchValue}"</h1></section>
+                                    <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>    
+                                 </div>`
+    }
+
+    this.postSearchData(searchValue); // 검색 결과 저장
   }
   async getMoreSearchedImages(index){
     // console.log(searchValue)

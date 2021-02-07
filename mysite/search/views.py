@@ -4,8 +4,6 @@ from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import HeroSearchForm
-
 from .models import SearchHistory
 
 CURRENT_USER = 'gilbert'  # 현재 사용자 아이디
@@ -39,8 +37,8 @@ def index(request):
             search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at').values('content')[:5]
 
             return JsonResponse(list(search_history), safe=False)
-    else:
-        print("requst isn't from ajax")
-        search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at')[:5]
-        context = {'search_history': search_history}
-        return render(request, "search/index.html", context)
+    # else:
+    #     print("requst isn't from ajax")
+    #     search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at')[:5]
+    #     context = {'search_history': search_history}
+    #     return render(request, "home/index.html", context)

@@ -9,7 +9,7 @@ const searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_s
 const searchBar2 = document.querySelector('.search-bar_input2');
 const searchBtn2 = document.querySelector('.search-bar_btn2')
 
-// 드롭다운을 위한 함수
+// 드롭다운 외 다른 영역을 클릭하면, 드롭다운을 닫기위한 함수
 function getEvent() {
     window.addEventListener('click', function(e){
       if (formSearch.contains(e.target)){
