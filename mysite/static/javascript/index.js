@@ -4,20 +4,24 @@ class PhotoGallery{
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.form-search');
     this.searchForm2 = document.querySelector('.form-search2');
-    this.body = document.body;
     this.header = document.querySelector('.hero');
     this.nav = document.querySelector('.nav-bar');
     this.nav_searchbar = document.querySelector('.search-bar_container2');
-
+    this.container = document.querySelector('.container');
     this.loadMore = document.querySelector('.load-more');
     // this.logo = document.querySelector('.logo')
     this.pageIndex = 1;
     this.searchValueGlobal = '';
     this.eventHandle();
   }
-  // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
-  fix () {
-    this.body.removeChild(this.header)
+
+  fixNav () { // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
+    this.body = document.body;
+    this.header = document.querySelector('.hero');
+    if(this.header != null) {
+      console.log("hero already defined");
+      this.body.removeChild(this.header);
+    }
     this.nav.classList.add('fix');
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
     this.nav_searchbar.style.visibility = 'visible';
@@ -28,16 +32,19 @@ class PhotoGallery{
       this.getImg(1);
     });
     this.searchForm.addEventListener('submit', (e)=>{
+      console.log("searchForm1 in Hero clicked")
       this.pageIndex = 1;
       this.getSearchedImages(e);
-
-      this.fix();
+      this.fixNav();
     });
     this.searchForm2.addEventListener('submit', (e)=>{
+      console.log("searchForm in Nav clicked")
       this.pageIndex = 1;
       this.getSearchedImages2(e);
 
-      this.fix();
+      this.input = document.querySelector('.search-bar_input2')
+      this.input.value = "";
+      this.fixNav();
     });
     this.loadMore.addEventListener('click', (e)=>{
       this.loadMoreImages(e);
@@ -63,9 +70,9 @@ class PhotoGallery{
         Authorization: this.API_KEY
       }
     });
-    const data = await response.json();
+    this.fetch_data = await response.json();
     // console.log(data);
-    return data;
+    return this.fetch_data;
   }
   GenerateHTML(photos){
     photos.forEach(photo=>{
@@ -77,7 +84,7 @@ class PhotoGallery{
         <h3>${photo.photographer}</h3>
       </a>
       `;
-      this.galleryDIv.appendChild(item)
+      this.galleryDIv.appendChild(item);
     })
   }
   async getSearchedImages(e){
@@ -90,24 +97,71 @@ class PhotoGallery{
     const searchValue = e.target.querySelector('.search-bar_input').value;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`;
     const data = await this.fetchImages(baseURL);
 
-    if (data.total_results >= 1) {
-      this.GenerateHTML(data.photos);
-      e.target.reset();
-    }
-    else {
-      this.container = document.querySelector('.container');
-      this.container.removeChild(this.loadMore);
-      this.container.innerHTML= `<div style="margin-top:50px">
-                                    <section><h1 class="error_msg">We Couldn't Find Anything For "${searchValue}"</h1></section>
-                                    <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>    
-                                 </div>`
-    }
+    this.fromDataSaveToDisplayPhoto(searchValue, data, e);
+  }
+  fromDataSaveToDisplayPhoto (searchValue, data, e){
+    console.log(searchValue);
+    console.log(data);
 
-    // 폼 데이터를 장고 뷰함수로 보내(POST) 최근 5개 데이터를 비동기로 리턴받도록 함
-    this.postSearchData(searchValue);
+    this.postSearchData(searchValue); // 검색 결과 저장
+    this.errorHandling(data, searchValue); // 검색한 사진이 없을 경우, 에러 처리
+    this.displayPhoto(data, e); // 사진 출력
+  }
+    errorHandling(data, searchValue) {
+    if (data['status'] === 400){ // 출력할 사진이 없을 때(에러)
+      console.log("no picture");
+      this.loadMore = document.querySelector('.load-more');
+      this.loadMoreVisibility = this.loadMore.style.visibility;
+      this.result_msg = document.querySelector('.result_msg');
+      // Load More가 있으면 숨기고 출력
+      if (this.loadMoreVisibility === 'visible') {
+        console.log("loadmore is visible");
+        this.loadMore.style.visibility="hidden";
+        console.log("hide loadmore");
+        this.result_msg.innerHTML = `<section><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></section>
+                                     <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>
+                                     </div>`;
+      }
+      else {
+        this.result_msg.innerHTML = `<section><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></section>
+                                     <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>
+                                     </div>`;
+      }
+    }
+  }
+  displayPhoto(data, e) {
+    if (data['total_results'] >= 1) { // 출력할 사진이 있을 때
+      console.log("yes picture");
+      // Load More가 숨겨져 있으면 보이기
+      this.loadMore = document.querySelector('.load-more');
+      this.loadMoreVisibility = this.loadMore.style.visibility;
+      if (this.loadMoreVisibility === "hidden") {
+        this.loadMore.style.visibility = "visible";
+      }
+
+      // 사진 출력
+      this.result_msg = document.querySelector('.result_msg');
+      if (typeof this.result_msg == "undefined") {
+        console.log("result_msg is null(ok)");
+        this.GenerateHTML(data.photos);
+        e.target.reset();
+        console.log("photo displayed");
+      }
+      else { // 에러메시지가 있다면 제거 후 사진 출력
+        console.log("result_msg is not null");
+        if (this.result_msg != null) {
+          this.container.removeChild(this.result_msg);
+        }
+        console.log("result_msg is deleted");
+
+        this.GenerateHTML(data.photos);
+        e.target.reset();
+        console.log("photo displayed");
+      }
+    }
   }
   postSearchData(searchValue) {
     $(document).ready(function() {
@@ -154,28 +208,14 @@ class PhotoGallery{
     searchBtn2.style.borderBottomRightRadius = "6px";
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=24`;
     const data = await this.fetchImages(baseURL);
 
-
-    if (data.total_results >= 1) {
-      this.GenerateHTML(data.photos);
-      e.target.reset();
-    }
-    else {
-      this.container = document.querySelector('.container');
-      this.container.removeChild(this.loadMore);
-      this.container.innerHTML= `<div style="margin-top:50px">
-                                    <section><h1 class="error_msg">We Couldn't Find Anything For "${searchValue}"</h1></section>
-                                    <section><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></section>    
-                                 </div>`
-    }
-
-    this.postSearchData(searchValue); // 검색 결과 저장
+    this.fromDataSaveToDisplayPhoto(searchValue, data, e);
   }
   async getMoreSearchedImages(index){
     // console.log(searchValue)
-    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=24`
+    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=24`;
     const data = await this.fetchImages(baseURL);
     // console.log(data)
     this.GenerateHTML(data.photos);
