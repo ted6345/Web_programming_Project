@@ -101,10 +101,13 @@
 {% block main %}
     <main>
         <div class="container">
+            <div class="result_msg" style="margin-top:50px">
+
+            </div>
             <div class="gallery">
 
             </div>
-            <a class="load-more" data-img="curated">Load More</a>
+            <a class="load-more" style="visibility: visible" data-img="curated">Load More</a>
         </div>
     </main>
 {% endblock %}
@@ -112,5 +115,6 @@
 <script src="{% static 'javascript/index.js' %}"></script>
 <script src="{% static 'javascript/scroll.js' %}"></script>
 <script src="{% static 'javascript/dropdown.js' %}"></script>
+<script src="{% static 'javascript/reload.js' %}"></script>
 </body>
 </html>
