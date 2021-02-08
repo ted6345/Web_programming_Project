@@ -21,6 +21,7 @@ class PhotoGallery{
     if(this.header != null) {
       console.log("hero already defined");
       this.body.removeChild(this.header);
+      console.log("hero is deleted");
     }
     this.nav.classList.add('fix');
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
@@ -111,7 +112,7 @@ class PhotoGallery{
     this.displayPhoto(data, e); // 사진 출력
   }
     errorHandling(data, searchValue) {
-    if (data['status'] === 400){ // 출력할 사진이 없을 때(에러)
+    if (data['status'] === 400 || data['total_results'] <= 0) { // 출력할 사진이 없을 때(에러)
       console.log("no picture");
       this.loadMore = document.querySelector('.load-more');
       this.loadMoreVisibility = this.loadMore.style.visibility;
