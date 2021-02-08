@@ -37,8 +37,7 @@ def index(request):
             search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at').values('content')[:5]
 
             return JsonResponse(list(search_history), safe=False)
-    # else:
-    #     print("requst isn't from ajax")
-    #     search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at')[:5]
-    #     context = {'search_history': search_history}
-    #     return render(request, "home/index.html", context)
+    else:
+        search_history = SearchHistory.objects.filter(searcher_id=CURRENT_USER).order_by('-searched_at')[:5]
+        context = {'search_history': search_history}
+        return render(request, "home/index.html", context)

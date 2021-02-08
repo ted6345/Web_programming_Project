@@ -3,7 +3,6 @@ body {
     height: 100%;
 }
 
-
 body, html {
     font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen, cantarell, helvetica neue, ubuntu, sans-serif;
     color: #1a1a1a;
@@ -143,13 +142,13 @@ body, html {
     width: 80px;
     height: 40px;
     line-height: 40px;
-
+    border: none;
     color: white;
     text-decoration: none;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 2px;
-    background-color: rgb(0, 122, 254);
+    background-color: rgb(33, 150, 243);
     border-radius: 4px;
     text-align: center;
     vertical-align: middle;
@@ -170,7 +169,7 @@ body, html {
     -webkit-box-pack: center;
     justify-content: center;
     padding: 1.15rem;
-    padding-top: 0px;
+    padding-top: 74px;
     padding-bottom: 66px;
     color: #fff;
     background-color: #d3d3d3;
@@ -257,21 +256,11 @@ div {
     display: block;
 }
 
-.hero {
-    background: antiquewhite;
-
-    padding: 74px 16px 66px;
-    height: 100%;
-    max-height: 500px;
-    min-height: 380px;
-
-    z-index: 1;
-}
 
 /* 드롭다운 */
 #search-bar-dropdown_recent_searches{
     position: absolute;
-    padding: 10px;
+    padding: 20px;
     z-index: 10;
     height: 300px;
     max-height: calc(100vh - 150px);
@@ -289,7 +278,7 @@ div {
     position: absolute;
     left: 170px;
     top: 53.5px;
-    padding: 10px;
+    padding: 20px;
     height: 300px;
     max-height: calc(100vh - 150px);
     width: 651px;
@@ -303,54 +292,87 @@ div {
     text-align: left;
     z-index: 28;
 }
-.search-bar__dropdown__section__content, .search-bar__dropdown__section__content2 {
-    display: flex;
-}
-.search-bar__dropdown__section__content div, .search-bar__dropdown__section__content2 div {
-    border: solid black 1px;
-    margin-right: 10px;
-    width: 30px;
-}
 
+.search-bar__dropdown__section__title h1, .search-bar__dropdown__section__title2 h1 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+.search-bar__dropdown__section__content, .search-bar__dropdown__section__content2 {
+
+    height: 35px;
+    align-items: center;
+
+
+}
+.search-bar__dropdown__section__content a, .search-bar__dropdown__section__content2 a{
+    text-decoration: none;
+    padding: 7px 8px 7px 14px;
+    background-color: rgb(232, 232, 232);
+    border-radius: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.history_btn {
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    color: #1a1a1a;
+}
+.search-bar__dropdown__section__content a:hover, .search-bar__dropdown__section__content2 a:hover {
+    background-color: rgb(211,211,211);
+}
 
 
 /*이미지 갤러리 파트*/
 .container {
-    background-color: white;
-    width: 100%;
-    /*max-width: 900px;*/
-    /*margin: 0 auto;*/
-    box-shadow: 0 0 61px 7px #5e849c40;
-    padding: 50px 20px;
+    /*background-color: white;*/
+    width: 1850px;
+    padding-left: 20px;
+    padding-right:20px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 100px;
+    /*box-shadow: 0 0 61px 7px #5e849c40;*/
+
     border-radius: 20px;
     text-align: center;
 }
+
 
 img{
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-
 .gallery{
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) ;
-  margin-top: 50px;
-  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ;
+  margin-top: 10px;
+  grid-gap: 1em;
+}
+.gallery_title {
+    color: rgb(26, 26, 26);
+    font-size: 18px;
+    mso-ansi-font-weight: 600;
+    line-height: 26px;
+    text-align: left;
+    margin-bottom: 0;
 }
 .item{
   width: 100%;
-  height: 300px;
+  height: 349px;
   position: relative;
   overflow: hidden;
-  border-radius:8px;
+  /*border-radius:8px;*/
   transition: .3s ease box-shadow;
 }
 
 .item:hover{
-  box-shadow: 0 0 20px 3px #00000042;
+  box-shadow: 0 0 20px 1px #00000042;
 }
 .item:nth-last-child(1){
   margin-bottom: 0;
@@ -364,6 +386,8 @@ img{
   bottom: -70px;
   font-weight: 300;
   transition: .5s ease-in-out bottom;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 .item:hover h3{
   bottom: 0;
@@ -372,6 +396,7 @@ img{
 .load-more{
   display: inline-block;
   margin-top:30px;
+  margin-bottom: 30px;
   padding: 20px 50px;
   background-color: black;
   text-decoration: none;
@@ -384,9 +409,8 @@ img{
 /* 에러 메세지 */
 .error_message {
     margin-top: 50px;
-    line-height: 1.2;
+
     font-weight: 800;
-    font-size: 26px;
     text-transform: capitalize;
     text-align: center;
 }
