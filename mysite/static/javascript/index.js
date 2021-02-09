@@ -119,7 +119,7 @@ class PhotoGallery{
       item.classList.add('item');
       item.innerHTML = `
          <a href="#layer-popup" class="btn-open"> 
-        <img src="${photo.src.medium}" id="${photo.src.large}">
+        <img src="${photo.src.large}" id="${photo.src.large}">
         <h3>${photo.photographer}</h3>
         </a>
       `;

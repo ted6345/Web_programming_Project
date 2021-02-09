@@ -14,6 +14,7 @@ function popup(el,src) {
     $('.layer-container').fadeIn();
     $el.find("img").attr("src",src);
 
+    // pop-up layer을 가운데도 정렬시키기 위한 코드
     var navHeight =$('.nav-bar').outerHeight();
     var $elWidth = ~~($el.outerWidth()),
         $elHeight = ~~($el.outerHeight()),
@@ -22,12 +23,12 @@ function popup(el,src) {
 
     if($elWidth<$elHeight){
       var tmp = $elHeight;
-      $elHeight= docHeight*0.7;
+      $elHeight= docHeight*0.9;
       $elWidth = $elWidth* $elHeight/tmp;
     }
     else{
         var tmp = $elWidth;
-      $elWidth= docWidth*0.7;
+      $elWidth= docWidth*0.9;
       $elHeight = $elHeight* $elWidth/tmp;
 
     }
@@ -35,6 +36,7 @@ function popup(el,src) {
     $el.css({
             top: (docHeight-$elHeight)/2+navHeight,
             left:(docWidth -$elWidth)/2,
+
             height : $elHeight,
             width: $elWidth
 

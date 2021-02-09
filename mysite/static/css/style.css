@@ -513,7 +513,7 @@ a.btn-layerClose:hover {
 
 .layer-popup .modal-dialog {
 
-    height: 70%;
+    height: 90%;
     padding: 20px 25px;
     background-color: #fff;
 }
@@ -522,4 +522,7 @@ a.btn-layerClose:hover {
     padding: 10px 15px;
     text-align: center;
     line-height: 100px;
+}
+.pop-img{
+    object-fit: contain;
 }
