@@ -114,7 +114,7 @@ class PhotoGallery{
       item.classList.add('item');
       item.innerHTML = `
       <a href='${photo.src.original}' target="_blank">
-        <img src="${photo.src.medium}">
+        <img src="${photo.src.large}">
         <h3>${photo.photographer}</h3>
       </a>
       `;
