@@ -125,6 +125,25 @@
             </div>
             <a class="load-more" style="display: inline-block" data-img="curated">Load More</a>
         </div>
+
+
+        //팝업창 레이어
+        <div class="layer-container">
+            <div class="dimBg"></div>
+            <div class="layer-popup" id="layer-popup">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <img>
+                    </div>
+
+                    <div class="btn-r">
+                        <a href="#" class="btn-layerClose">Close</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 {% endblock %}
 
@@ -132,5 +151,7 @@
 <script src="{% static 'javascript/scroll.js' %}"></script>
 <script src="{% static 'javascript/dropdown.js' %}"></script>
 <script src="{% static 'javascript/reload.js' %}"></script>
+<script src="{% static 'javascript/pop_up.js' %}"></script>
+
 </body>
 </html>

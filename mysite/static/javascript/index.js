@@ -118,10 +118,10 @@ class PhotoGallery{
       const item= document.createElement('div');
       item.classList.add('item');
       item.innerHTML = `
-      <a href='${photo.src.original}' target="_blank">
-        <img src="${photo.src.medium}">
+         <a href="#layer-popup" class="btn-open"> 
+        <img src="${photo.src.medium}" id="${photo.src.large}">
         <h3>${photo.photographer}</h3>
-      </a>
+        </a>
       `;
       this.galleryDIv.appendChild(item);
     })
