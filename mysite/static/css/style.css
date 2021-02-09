@@ -302,8 +302,7 @@ div {
 
     height: 35px;
     align-items: center;
-
-
+    cursor: default;
 }
 .search-bar__dropdown__section__content a, .search-bar__dropdown__section__content2 a{
     text-decoration: none;

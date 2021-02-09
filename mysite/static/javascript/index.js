@@ -9,12 +9,12 @@ class PhotoGallery{
     this.nav_searchbar = document.querySelector('.search-bar_container2');
     this.container = document.querySelector('.container');
     this.loadMore = document.querySelector('.load-more');
+    this.searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
     // this.logo = document.querySelector('.logo')
 
     this.pageIndex = 1;
     this.searchValueGlobal = '';
     this.eventHandle();
-    this.checkBtnLink();
   }
 
   checkBtnLink() {
@@ -35,33 +35,33 @@ class PhotoGallery{
 
     const searchValue = text;
 
-    console.log("abc:", searchValue);
     this.searchValueGlobal = searchValue;
     const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
     const data = await this.fetchImages(baseURL);
 
-    this.searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
-    this.searchBarDropDown2.style.visibility = "hidden";
+
 
     this.errorHandling(data, searchValue); // 검색한 사진이 없을 경우, 에러 처리
     this.displayPhoto(data, e, searchValue); // 사진 출력
   }
 
   fixNav () { // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
-    this.body = document.body;
-    this.header = document.querySelector('.hero');
     this.galleryTitle = document.querySelector('.gallery_title');
     this.galleryTitle.style.display = "none";
+
+    this.body = document.body;
+    this.header = document.querySelector('.hero');
     if(this.header != null) {
       console.log("hero already defined");
       this.body.removeChild(this.header);
       console.log("hero is deleted");
     }
+
     this.nav = document.querySelector('.nav-bar');
     this.nav.classList.add('fix');
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
     this.nav_searchbar.style.visibility = 'visible';
-
+    this.searchBarDropDown2.style.visibility = 'hidden';
   }
 
   eventHandle(){
@@ -87,11 +87,7 @@ class PhotoGallery{
       this.loadMoreImages(e);
       console.log(e);
     })
-    // this.logo.addEventListener('click',()=>{
-    //   this.pageIndex = 1;
-    //   this.galleryDIv.innerHTML = '';
-    //   this.getImg(this.pageIndex);
-    // })
+    this.checkBtnLink();
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
