@@ -7,6 +7,7 @@ nav_searchbar = document.querySelector('.search-bar_container2');
 // hero_searchbar = document.querySelector('.search-bar_container')
 topDropDown = document.querySelector('#search-bar-dropdown_recent_searches2');
 
+// 네비게이션바 설
 $(window).scroll(function (event) {
     didScroll = true;
     var st = $(this).scrollTop();
@@ -25,29 +26,11 @@ $(window).scroll(function (event) {
     }
 });
 
-//
-// setInterval(function () {
-//     if (didScroll) {
-//         hasScrolled();
-//         didScroll = false;
-//     }
-// }, 250);
-//
-// function hasScrolled() {
-//     var st = $(this).scrollTop(); // Make sure they scroll more than delta
-//     console.log(st);
-//     if (Math.abs(lastScrollTop - st) <= delta) return;
-//     // If they scrolled down and are past the navbar, add class .nav-up.
-//     // This is necessary so you never see what is "behind" the navbar.
-//     if (st > lastScrollTop && st > navbarHeight) {
-//         // Scroll Down
-//         $('header').removeClass('nav-down').addClass('nav-up');
-//     } else {
-//         // Scroll Up
-//         if (st + $(window).height() < $(document).height()) {
-//             $('header').removeClass('nav-up').addClass('nav-down');
-//         }
-//     }
-//     lastScrollTop = st;
-// }
-
+// 자동 스크롤
+$(window).scroll(function() {
+  if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+    var loadMore = document.querySelector('.load-more');
+    loadMore.click();
+    console.log("scroll_end")
+  }
+});

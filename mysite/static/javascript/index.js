@@ -16,6 +16,7 @@ class PhotoGallery{
     this.eventHandle();
     this.checkBtnLink();
   }
+
   checkBtnLink() {
     this.recent = document.querySelectorAll('.history_link');
     // console.log(this.recent)
@@ -61,9 +62,6 @@ class PhotoGallery{
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
     this.nav_searchbar.style.visibility = 'visible';
 
-    if (this.loadMore.style.display === "inline-block") {
-      this.loadMore.style.display = "none";
-    }
   }
 
   eventHandle(){
@@ -87,6 +85,7 @@ class PhotoGallery{
     });
     this.loadMore.addEventListener('click', (e)=>{
       this.loadMoreImages(e);
+      console.log(e);
     })
     // this.logo.addEventListener('click',()=>{
     //   this.pageIndex = 1;
@@ -149,8 +148,6 @@ class PhotoGallery{
     errorHandling(data, searchValue) {
     if (data['status'] === 400 || data['total_results'] <= 0) { // 출력할 사진이 없을 때(에러)
       console.log("no picture");
-      this.loadMore = document.querySelector('.load-more');
-      this.loadMoreDisplay = this.loadMore.style.display;
 
       this.result_msg = document.querySelector('.result_msg');
       this.msgDisplay = this.result_msg.style.display;
@@ -166,32 +163,17 @@ class PhotoGallery{
         this.searchTitle.style.display = 'none';
       }
 
-      // Load More가 있으면 숨기고 출력
-      if (this.loadMoreDisplay === 'inline-block') {
-        console.log("loadmore is visible");
-        this.loadMore.style.display="none";
-        console.log("hide loadmore");
-        this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
-                                     <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
-                                     </div>`;
-      }
-      else {
-        this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
-                                     <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
-                                     </div>`;
-      }
+      this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
+                                   <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
+                                   </div>`;
     }
   }
   displayPhoto(data, e, searchValue) {
     if (data['total_results'] >= 1) { // 출력할 사진이 있을 때
       console.log("yes picture");
-      // Load More가 숨겨져 있으면 보이기
+
       this.searchTitle = document.querySelector('.search_title');
       this.titleDisplay = this.searchTitle.style.display;
-
-
-      this.loadMore = document.querySelector('.load-more');
-      this.loadMoreDisplay = this.loadMore.style.display;
 
       if (this.titleDisplay === "none") {
         this.searchTitle.style.display = "block";
@@ -199,10 +181,6 @@ class PhotoGallery{
       }
       this.searchTitle.innerHTML = `"${searchValue}" Photos`;
 
-      if (this.loadMoreDisplay === "none") {
-        this.loadMore.style.display = "inline-block";
-
-      }
       // 사진 출력
       this.result_msg = document.querySelector('.result_msg');
       if (typeof this.result_msg == "undefined") {
