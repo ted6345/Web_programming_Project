@@ -36,7 +36,7 @@ class PhotoGallery{
     const searchValue = text;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
 
@@ -91,7 +91,7 @@ class PhotoGallery{
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
-    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos)
     // console.log(data)
@@ -128,7 +128,7 @@ class PhotoGallery{
     const searchValue = e.target.querySelector('.search-bar_input').value;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
     this.fromDataSaveToDisplayPhoto(searchValue, data, e);
@@ -246,14 +246,14 @@ class PhotoGallery{
     const searchValue = e.target.querySelector('.search-bar_input2').value;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
     this.fromDataSaveToDisplayPhoto(searchValue, data, e);
   }
   async getMoreSearchedImages(index){
     // console.log(searchValue)
-    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
     // console.log(data)
     this.GenerateHTML(data.photos);
