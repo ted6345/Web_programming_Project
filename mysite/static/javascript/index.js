@@ -9,13 +9,14 @@ class PhotoGallery{
     this.nav_searchbar = document.querySelector('.search-bar_container2');
     this.container = document.querySelector('.container');
     this.loadMore = document.querySelector('.load-more');
+    this.searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
     // this.logo = document.querySelector('.logo')
 
     this.pageIndex = 1;
     this.searchValueGlobal = '';
     this.eventHandle();
-    this.checkBtnLink();
   }
+
   checkBtnLink() {
     this.recent = document.querySelectorAll('.history_link');
     // console.log(this.recent)
@@ -34,36 +35,33 @@ class PhotoGallery{
 
     const searchValue = text;
 
-    console.log("abc:", searchValue);
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
-    this.searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
-    this.searchBarDropDown2.style.visibility = "hidden";
+
 
     this.errorHandling(data, searchValue); // 검색한 사진이 없을 경우, 에러 처리
     this.displayPhoto(data, e, searchValue); // 사진 출력
   }
 
   fixNav () { // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
-    this.body = document.body;
-    this.header = document.querySelector('.hero');
     this.galleryTitle = document.querySelector('.gallery_title');
     this.galleryTitle.style.display = "none";
+
+    this.body = document.body;
+    this.header = document.querySelector('.hero');
     if(this.header != null) {
       console.log("hero already defined");
       this.body.removeChild(this.header);
       console.log("hero is deleted");
     }
+
     this.nav = document.querySelector('.nav-bar');
     this.nav.classList.add('fix');
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
     this.nav_searchbar.style.visibility = 'visible';
-
-    if (this.loadMore.style.display === "inline-block") {
-      this.loadMore.style.display = "none";
-    }
+    this.searchBarDropDown2.style.visibility = 'hidden';
   }
 
   eventHandle(){
@@ -87,16 +85,13 @@ class PhotoGallery{
     });
     this.loadMore.addEventListener('click', (e)=>{
       this.loadMoreImages(e);
+      console.log(e);
     })
-    // this.logo.addEventListener('click',()=>{
-    //   this.pageIndex = 1;
-    //   this.galleryDIv.innerHTML = '';
-    //   this.getImg(this.pageIndex);
-    // })
+    this.checkBtnLink();
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
-    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos)
     // console.log(data)
@@ -118,9 +113,9 @@ class PhotoGallery{
       const item= document.createElement('div');
       item.classList.add('item');
       item.innerHTML = `
-         <a href="#layer-popup" class="btn-open"> 
-        <img src="${photo.src.large}" id="${photo.src.large}">
-        <h3>${photo.photographer}</h3>
+        <a href="#layer-popup" class="btn-open"> 
+            <img src="${photo.src.large}" id="${photo.src.large}">
+            <h3>${photo.photographer}</h3>
         </a>
       `;
       this.galleryDIv.appendChild(item);
@@ -133,7 +128,7 @@ class PhotoGallery{
     const searchValue = e.target.querySelector('.search-bar_input').value;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
     this.fromDataSaveToDisplayPhoto(searchValue, data, e);
@@ -149,8 +144,6 @@ class PhotoGallery{
     errorHandling(data, searchValue) {
     if (data['status'] === 400 || data['total_results'] <= 0) { // 출력할 사진이 없을 때(에러)
       console.log("no picture");
-      this.loadMore = document.querySelector('.load-more');
-      this.loadMoreDisplay = this.loadMore.style.display;
 
       this.result_msg = document.querySelector('.result_msg');
       this.msgDisplay = this.result_msg.style.display;
@@ -166,32 +159,17 @@ class PhotoGallery{
         this.searchTitle.style.display = 'none';
       }
 
-      // Load More가 있으면 숨기고 출력
-      if (this.loadMoreDisplay === 'inline-block') {
-        console.log("loadmore is visible");
-        this.loadMore.style.display="none";
-        console.log("hide loadmore");
-        this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
-                                     <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
-                                     </div>`;
-      }
-      else {
-        this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
-                                     <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
-                                     </div>`;
-      }
+      this.result_msg.innerHTML = `<div><h1 class="error_msg">We Couldn\'t Find Anything For "${searchValue}"</h1></div>
+                                   <div><h1 class="recomend_msg">Discover beautiful photos on <a href="">the main page >></a></h1></div>
+                                   </div>`;
     }
   }
   displayPhoto(data, e, searchValue) {
     if (data['total_results'] >= 1) { // 출력할 사진이 있을 때
       console.log("yes picture");
-      // Load More가 숨겨져 있으면 보이기
+
       this.searchTitle = document.querySelector('.search_title');
       this.titleDisplay = this.searchTitle.style.display;
-
-
-      this.loadMore = document.querySelector('.load-more');
-      this.loadMoreDisplay = this.loadMore.style.display;
 
       if (this.titleDisplay === "none") {
         this.searchTitle.style.display = "block";
@@ -199,10 +177,6 @@ class PhotoGallery{
       }
       this.searchTitle.innerHTML = `"${searchValue}" Photos`;
 
-      if (this.loadMoreDisplay === "none") {
-        this.loadMore.style.display = "inline-block";
-
-      }
       // 사진 출력
       this.result_msg = document.querySelector('.result_msg');
       if (typeof this.result_msg == "undefined") {
@@ -272,14 +246,14 @@ class PhotoGallery{
     const searchValue = e.target.querySelector('.search-bar_input2').value;
 
     this.searchValueGlobal = searchValue;
-    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
     this.fromDataSaveToDisplayPhoto(searchValue, data, e);
   }
   async getMoreSearchedImages(index){
     // console.log(searchValue)
-    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=30`;
+    const baseURL = `https://api.pexels.com/v1/search?query=${this.searchValueGlobal}&page=${index}&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
     // console.log(data)
     this.GenerateHTML(data.photos);

@@ -1,7 +1,13 @@
+// var didScroll;
+// var lastScrollTop = 0;
+// var delta = 5;
+// var navbarHeight = $('nav').outerHeight();
 nav = document.querySelector('.nav-bar');
 nav_searchbar = document.querySelector('.search-bar_container2');
+// hero_searchbar = document.querySelector('.search-bar_container')
 topDropDown = document.querySelector('#search-bar-dropdown_recent_searches2');
 
+// 네비게이션바 설
 $(window).scroll(function (event) {
     didScroll = true;
     var st = $(this).scrollTop();
@@ -20,3 +26,11 @@ $(window).scroll(function (event) {
     }
 });
 
+// 자동 스크롤
+$(window).scroll(function() {
+  if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+    var loadMore = document.querySelector('.load-more');
+    loadMore.click();
+    console.log("scroll_end")
+  }
+});

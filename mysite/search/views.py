@@ -6,10 +6,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import SearchHistory
 
-CURRENT_USER = 'gilbert'  # 현재 사용자 아이디
-
 @csrf_exempt
 def index(request):
+    CURRENT_USER = request.session.get('account')
+
     search_data = SearchHistory.objects.all()
 
     if request.is_ajax():

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'search.apps.SearchConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
