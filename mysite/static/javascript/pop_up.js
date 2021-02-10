@@ -21,17 +21,24 @@ function popup(el,src) {
         docHeight = $(window).innerHeight()-navHeight,
         docWidth = $(window).innerWidth();
 
-    if($elWidth<$elHeight){
-      var tmp = $elHeight;
-      $elHeight= docHeight*0.9;
-      $elWidth = $elWidth* $elHeight/tmp;
-    }
-    else{
-        var tmp = $elWidth;
-      $elWidth= docWidth*0.9;
-      $elHeight = $elHeight* $elWidth/tmp;
+    $elWidth = docWidth*0.9;
+    $elHeight= docHeight*0.9;
 
-    }
+    //
+    // if($elWidth<$elHeight){
+    //   var tmp = $elHeight;
+    //   $elHeight= docHeight*0.9;
+    //   $elWidth = docWidth*0.9;
+    //
+    //   // $elWidth = $elWidth* $elHeight/tmp;
+    // }
+    // else{
+    //     var tmp = $elWidth;
+    //     $elWidth= docWidth*0.9;
+    //   // $elHeight = $elHeight* $elWidth/tmp;
+    //     $elHeight= docHeight*0.9;
+    //
+    // }
 
     $el.css({
             top: (docHeight-$elHeight)/2+navHeight,
