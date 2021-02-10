@@ -1,6 +1,6 @@
 class PhotoGallery{
   constructor(){
-    this.API_KEY = '563492ad6f917000010000019cb12da4f7db4d378977abb471d25982';
+    this.API_KEY = '563492ad6f917000010000014d8dc5a02e3b48e08f3d804617888f9c';
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.form-search');
     this.searchForm2 = document.querySelector('.form-search2');

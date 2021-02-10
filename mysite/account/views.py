@@ -18,11 +18,11 @@ def register(request):  # 회원가입 페이지를 보여주기 위한 함수
         res_data = {}
 
         if not (userID and userPW and re_password and userMail and userPhone):
-            res_data['error'] = "모든 값을 입력해야 합니다."
+            res_data['error'] = "All values must be entered."
             return render(request, 'register.html', res_data)
         if userPW != re_password:
             # return HttpResponse('비밀번호가 다릅니다.')
-            res_data['error'] = '비밀번호가 다릅니다.'
+            res_data['error'] = 'Invalid username or password.'
             return render(request, 'register.html', res_data)
         else:
             account = Account(userID=userID, userPW=make_password(userPW), userMail=userMail, userPhone=userPhone)
@@ -45,7 +45,7 @@ def login(request):
 
             # 아이디와 PW 중 어느 하나라도 입력되지 않은 경우
             if not (login_userID and login_userPW):
-                response_data['error'] = "아이디와 비밀번호를 모두 입력해주세요."
+                response_data['error'] = "All values must be entered."
 
             else:
                 account = Account.objects.get(userID=login_userID)
@@ -56,7 +56,7 @@ def login(request):
                     # 세션 account라는 key에 방금 로그인한 id를 저장한것.
                     return redirect('/')  # 로그인 된 홈 화면 이동
                 else:
-                    response_data['error'] = "비밀번호를 틀렸습니다."
+                    response_data['error'] = "Invalid username or password."
             return render(request, 'login.html', response_data)
 
         elif '_register' in request.POST:
