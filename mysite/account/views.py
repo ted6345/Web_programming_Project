@@ -22,7 +22,7 @@ def register(request):  # 회원가입 페이지를 보여주기 위한 함수
             return render(request, 'register.html', res_data)
         if userPW != re_password:
             # return HttpResponse('비밀번호가 다릅니다.')
-            res_data['error'] = 'Invalid username or password.'
+            res_data['error'] = 'Confirm password does not match.'
             return render(request, 'register.html', res_data)
         else:
             account = Account(userID=userID, userPW=make_password(userPW), userMail=userMail, userPhone=userPhone)
