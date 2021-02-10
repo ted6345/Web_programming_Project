@@ -1,6 +1,6 @@
 class PhotoGallery{
   constructor(){
-    this.API_KEY = '563492ad6f917000010000019cb12da4f7db4d378977abb471d25982';
+    this.API_KEY = '563492ad6f917000010000014d8dc5a02e3b48e08f3d804617888f9c';
     this.galleryDIv = document.querySelector('.gallery');
     this.searchForm = document.querySelector('.form-search');
     this.searchForm2 = document.querySelector('.form-search2');
@@ -113,10 +113,10 @@ class PhotoGallery{
       const item= document.createElement('div');
       item.classList.add('item');
       item.innerHTML = `
-      <a href='${photo.src.original}' target="_blank">
-        <img src="${photo.src.large}">
-        <h3>${photo.photographer}</h3>
-      </a>
+        <a href="#layer-popup" class="btn-open"> 
+            <img src="${photo.src.large}" id="${photo.src.large}">
+            <h3>${photo.photographer}</h3>
+        </a>
       `;
       this.galleryDIv.appendChild(item);
     })

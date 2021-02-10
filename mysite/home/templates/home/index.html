@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Pexels 121</title>
+    <title>121</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now "U" %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -57,7 +57,20 @@
                     </div>
                 </form>
             </div>
-        <a class="login" href=""><div>Login</div></a>
+        <form method = "POST">
+                {% csrf_token %}
+                <div>
+                    {% if log_sign == "logout" %}
+                    <button type="submit" class="login" value="Logout" name="_logout" class="btn btn-primary">
+                    Logout
+                    </button>
+                    {% else %}
+                    <button type="submit" class="login" value="Login" name="_login" class="btn btn-primary">
+                    Login
+                    </button>
+                    {% endif %}
+                </div>
+            </form>
     </nav>
 
 {% block header %}
@@ -125,6 +138,24 @@
             </div>
             <a class="load-more" style="visibility: hidden" data-img="curated">Load More</a>
         </div>
+
+        <!--        //팝업창 레이어-->
+        <div class="layer-container">
+            <div class="dimBg"></div>
+            <div class="layer-popup" id="layer-popup">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <img class="pop-img">
+                    </div>
+
+                    <div class="btn-r">
+                        <a href="#" class="btn-layerClose">Close</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 {% endblock %}
 
@@ -132,5 +163,6 @@
 <script src="{% static 'javascript/scroll.js' %}"></script>
 <script src="{% static 'javascript/dropdown.js' %}"></script>
 <script src="{% static 'javascript/reload.js' %}"></script>
+<script src="{% static 'javascript/pop_up.js' %}"></script>
 </body>
 </html>
