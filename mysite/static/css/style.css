@@ -522,3 +522,14 @@ a.btn-layerClose:hover {
 .pop-img{
     object-fit: contain;
 }
+
+
+.search-bar__dropdown__section__title, .search-bar__dropdown__section__title2 {
+    display: flex;
+}
+.erase_btn, .erase_btn2 {
+    border: none;
+    background: none;
+    margin-bottom: 14px;
+
+}

@@ -9,19 +9,18 @@ const searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_s
 const searchBar2 = document.querySelector('.search-bar_input2');
 const searchBtn2 = document.querySelector('.search-bar_btn2')
 
-const btnList = [
-    "history_link",
-    "history_btn lastet-5-content_1", "history_btn lastet-5-content_2", "history_btn lastet-5-content_3", "history_btn lastet-5-content_4", "history_btn lastet-5-content_5",
-    "mini-svg-icon", "svg", "path"
-];
+const btnList = ["his", "min", "svg", "path"];
 
 // 드롭다운 외 다른 영역을 클릭하면, 드롭다운을 닫기위한 함수
 function getEvent() {
     window.addEventListener('click', function(e){
-      console.log(btnList.indexOf(e.target.getAttribute('class')));
-      console.log(e.target.getAttribute('class'))
+      const classFull = e.target.getAttribute('class');
+      console.log(classFull);
+      if (classFull != null && classFull.length >= 3) {
+        var classLeftThree = classFull.slice(0, 3);
+      }
 
-      if (btnList.indexOf(e.target.getAttribute('class')) !== -1) {
+      if (btnList.indexOf(classLeftThree) !== -1) {
         console.log("history")
         searchBarDropDown2.style.visibility = "hidden";
       }
