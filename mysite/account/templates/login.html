@@ -2,7 +2,7 @@
 {% load static %}
 <head xmlns="http://www.w3.org/1999/html">
     <meta charset="utf-8"/>
-    <title>Pexels 121</title>
+    <title>121</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/login_style.css' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,7 +25,7 @@
         </div>
     </a>
     <div>
-        <h1 class="register_text">121이 처음이신가요?</h1>
+        <h1 class="register_text">Have an account?</h1>
     </div>
 
     <form method="POST">
@@ -39,24 +39,24 @@
 
 <div>
     <form method="POST" class="login_form">
-        <h2>121에 오신 것을 환영합니다.</h2>
+        <h2>Welcome Back To 121</h2>
         {% csrf_token %}
         <div class="form_id">
             <input type="text"
                    class="id form-control"
                    name="userID"
                    id="id userID"
-                   placeholder="ID">
+                   placeholder="Username">
         </div>
         <div class="form_pw">
             <input type="password"
                    name="userPW"
                    class="pw form-control"
                    id="userPW"
-                   placeholder="PW">
+                   placeholder="Password">
         </div>
         <button type="submit" value="Login" name="_login" class="btn btn-primary">
-            로그인
+            Login
         </button>
         <br>
         <span style="color:red;"><strong>{{ error }}</strong> </span>

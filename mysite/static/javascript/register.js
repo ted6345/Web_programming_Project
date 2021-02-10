@@ -1,6 +1,6 @@
 class PhotoGallery{
   constructor(){
-    this.API_KEY = '563492ad6f917000010000019cb12da4f7db4d378977abb471d25982';
+    this.API_KEY = '563492ad6f917000010000014d8dc5a02e3b48e08f3d804617888f9c';
     this.galleryDIv = document.querySelector('.gallery');
     this.nav = document.querySelector('.nav-bar');
     this.container = document.querySelector('.container');
@@ -21,7 +21,7 @@ class PhotoGallery{
   }
   async getImg(index){
     // this.loadMore.setAttribute('data-img', 'curated');
-    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=12`;
+    const baseURL = `https://api.pexels.com/v1/curated?page=${index}&per_page=32`;
     const data = await this.fetchImages(baseURL);
     this.GenerateHTML(data.photos);
     // console.log(data)

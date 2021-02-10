@@ -21,7 +21,7 @@ function popup(el,src) {
         docHeight = $(window).innerHeight()-navHeight,
         docWidth = $(window).innerWidth();
 
-    $elWidth = docWidth*0.9;
+    $elWidth = docWidth*0.5;
     $elHeight= docHeight*0.9;
 
     //

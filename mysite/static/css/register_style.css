@@ -71,6 +71,7 @@ div {
     /*padding: 50px 20px;*/
     border-radius: 20px;
     text-align: center;
+    opacity: 0.7;
 }
 
 img{
@@ -83,16 +84,16 @@ img{
 .gallery{
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) ;
-  margin-top: 60px;
-  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ;
+  margin-top: 10px;
+  grid-gap: 1em;
 }
 .item{
   width: 100%;
-  height: 300px;
+  height: 349px;
   position: relative;
   overflow: hidden;
-  border-radius:8px;
+  /*border-radius:8px;*/
   transition: .3s ease box-shadow;
 }
 
@@ -125,8 +126,8 @@ img{
 }
 .register_form{
     position:absolute;
-    width:400px;
-    height:510px;
+    width:420px;
+    height:600px;
     padding: 40px 20px;
     background-color:#FFFFFF;
     text-align:center;
@@ -139,6 +140,7 @@ img{
     text-align: center;
     margin-top: 10px;
     margin-bottom: 30px;
+    font-size: 33px;
 }
 .form_id{
     border-bottom: 2px solid #adadad;
@@ -215,8 +217,9 @@ img{
     left:40%;
     transform: translateX(-50%);
     margin-bottom: 40px;
+    margin-top: 20px;
     width:80%;
-    height:40px;
+    height:60px;
     background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
     background-position: left;
     background-size: 200%;
@@ -226,6 +229,8 @@ img{
     cursor:pointer;
     transition: 0.4s;
     display:inline;
+    font-size: 21px;
+    border-radius: 7px;
 }
 .btn:hover {
     background-position: right;
