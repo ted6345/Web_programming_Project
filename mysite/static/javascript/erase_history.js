@@ -30,8 +30,6 @@ function eraseData() {
               console.log(historyBtn)
               $('.history_link').remove()
 
-
-
             },
             error: function (data) {
               console.log("ajax get error");

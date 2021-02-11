@@ -11,38 +11,33 @@ class PhotoGallery{
     this.loadMore = document.querySelector('.load-more');
     this.searchBarDropDown2 = document.querySelector('#search-bar-dropdown_recent_searches2');
     // this.logo = document.querySelector('.logo')
-
+    this.recents = document.querySelectorAll('.history_link');
     this.pageIndex = 1;
     this.searchValueGlobal = '';
     this.eventHandle();
   }
 
-  checkBtnLink() {
-    this.recent = document.querySelectorAll('.history_link');
-    console.log("this recent", this.recent)
-    for (let i=0 ; i < this.recent.length ; i++) {
-      this.recent[i].addEventListener('click', (e) => {
-        var text = this.recent[i].getElementsByTagName("div")[0].innerText;
-        console.log("button clicked")
-        this.historyBtnLink(e, text);
-        this.fixNav();
-      });
-    }
-  }
-  async historyBtnLink(e, text){
+  async historyBtnLink(e, t){
     this.loadMore.setAttribute('data-img', 'search');
     this.galleryDIv.innerHTML='';
 
-    const searchValue = text;
+    const searchValue = t;
 
     this.searchValueGlobal = searchValue;
     const baseURL = `https://api.pexels.com/v1/search?query=${searchValue}&page=1&per_page=30&locale=ko-KR`;
     const data = await this.fetchImages(baseURL);
 
-
-
     this.errorHandling(data, searchValue); // 검색한 사진이 없을 경우, 에러 처리
     this.displayPhoto(data, e, searchValue); // 사진 출력
+  }
+  checkHistoryBtn(rc) {
+    // 여기가 재실행 안됨
+    rc.forEach(element => element.addEventListener('click', function(e) {
+      const text = element.getElementsByTagName("div")[0].innerText;
+      console.log("element", element, "text", text)
+      this.historyBtnLink(e, text);
+      this.fixNav();
+    }.bind(this)));
   }
 
   fixNav () { // 검색 후 hero 삭제, 네비게이션바 고정 및 투명 제거를 위한 함수
@@ -62,20 +57,23 @@ class PhotoGallery{
     this.nav.style.backgroundColor = 'rgb(35, 42, 52)';
     this.nav_searchbar.style.visibility = 'visible';
     this.searchBarDropDown2.style.visibility = 'hidden';
+    window.scrollTo(0,0);
   }
-
   eventHandle(){
+    // const recents = document.querySelectorAll('.history_link');
+    // this.checkHistoryBtn(recents);
+
     document.addEventListener('DOMContentLoaded',()=>{
       this.getImg(1);
     });
     this.searchForm.addEventListener('submit', (e)=>{
-      console.log("searchForm1 in Hero clicked")
+      console.log("searchForm1 in Hero submit")
       this.pageIndex = 1;
       this.getSearchedImages(e);
       this.fixNav();
     });
     this.searchForm2.addEventListener('submit', (e)=>{
-      console.log("searchForm in Nav clicked")
+      console.log("searchForm in Nav submit")
       this.pageIndex = 1;
       this.getSearchedImages2(e);
 
@@ -87,7 +85,7 @@ class PhotoGallery{
       this.loadMoreImages(e);
       console.log(e);
     })
-    this.checkBtnLink();
+
   }
   async getImg(index){
     this.loadMore.setAttribute('data-img', 'curated');
@@ -228,8 +226,8 @@ class PhotoGallery{
                       `<a class="history_link">
                                 <div class="history_btn lastest-5-content_${lastest.length + 1}"></div>
                                 <i class="mini-svg-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                                        <path class="path" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                     </svg>
                                 </i>
                             </a>`);
