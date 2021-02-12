@@ -1,6 +1,6 @@
 class PhotoGallery{
   constructor(){
-    this.API_KEY = '563492ad6f917000010000014d8dc5a02e3b48e08f3d804617888f9c';
+    this.API_KEY = config.SECRET_KEY;
     this.galleryDIv = document.querySelector('.gallery');
     this.nav = document.querySelector('.nav-bar');
     this.container = document.querySelector('.container');
