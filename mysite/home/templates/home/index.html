@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>121</title>
+    <title>Pexels 121</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now "U" %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -37,10 +37,7 @@
                     <div class="search-bar-dropdown2">
                         <div class="search-bar-dropdown_element2">
                             <div id="search-bar-dropdown_recent_searches2" style="visibility: hidden">
-                                <div class="search-bar__dropdown__section__title2">
-                                    <h1>Recent searches</h1>
-                                    <button class="erase_btn2" type="button"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Search->-Suggestions-(Empty-Query)" transform="translate(-586.000000, -74.000000)"> <g id="Popup" transform="translate(457.000000, 33.000000)"> <g id="Recent-Searches" transform="translate(12.000000, 40.000000)"> <g id="24px-(4)" transform="translate(116.000000, 0.000000)"> <path d="M9,1.5 C4.8525,1.5 1.5,4.8525 1.5,9 C1.5,13.1475 4.8525,16.5 9,16.5 C13.1475,16.5 16.5,13.1475 16.5,9 C16.5,4.8525 13.1475,1.5 9,1.5 Z M12.75,11.6925 L11.6925,12.75 L9,10.0575 L6.3075,12.75 L5.25,11.6925 L7.9425,9 L5.25,6.3075 L6.3075,5.25 L9,7.9425 L11.6925,5.25 L12.75,6.3075 L10.0575,9 L12.75,11.6925 Z" id="Shape" fill="#9E9E9E" fill-rule="nonzero"></path> <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon> </g> </g> </g> </g> </g> </svg></button>
-                                </div>
+                                <div class="search-bar__dropdown__section__title2"><h1>Recent searches</h1></div>
                                 <div class="search-bar__dropdown__section__content2">
                                     {% if search_history %}
                                             {% for i in search_history %}
@@ -104,18 +101,15 @@
                     <div class="search-bar-dropdown">
                         <div class="search-bar-dropdown_element">
                             <div id="search-bar-dropdown_recent_searches" style="visibility: hidden">
-                                <div class="search-bar__dropdown__section__title">
-                                    <h1>Recent searches</h1>
-                                    <button class="erase_btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Search->-Suggestions-(Empty-Query)" transform="translate(-586.000000, -74.000000)"> <g id="Popup" transform="translate(457.000000, 33.000000)"> <g id="Recent-Searches" transform="translate(12.000000, 40.000000)"> <g id="24px-(4)" transform="translate(116.000000, 0.000000)"> <path d="M9,1.5 C4.8525,1.5 1.5,4.8525 1.5,9 C1.5,13.1475 4.8525,16.5 9,16.5 C13.1475,16.5 16.5,13.1475 16.5,9 C16.5,4.8525 13.1475,1.5 9,1.5 Z M12.75,11.6925 L11.6925,12.75 L9,10.0575 L6.3075,12.75 L5.25,11.6925 L7.9425,9 L5.25,6.3075 L6.3075,5.25 L9,7.9425 L11.6925,5.25 L12.75,6.3075 L10.0575,9 L12.75,11.6925 Z" id="Shape" fill="#9E9E9E" fill-rule="nonzero"></path> <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon> </g> </g> </g> </g> </g> </svg></button>
-                                </div>
+                                <div class="search-bar__dropdown__section__title"><h1>Recent searches</h1></div>
                                 <div class="search-bar__dropdown__section__content">
                                     {% if search_history %}
                                             {% for i in search_history %}
                                                 <a class="history_link">
                                                     <div class="history_btn lastest-5-content_{{ forloop.counter }}">{{ i.content }}</div>
                                                     <i class="mini-svg-icon">
-                                                        <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                                                            <path class="path" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                                                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                                         </svg>
                                                     </i>
                                                 </a>
@@ -165,12 +159,10 @@
     </main>
 {% endblock %}
 
-<script src="{% static 'javascript/secrets.js' %}"></script>
 <script src="{% static 'javascript/index.js' %}"></script>
 <script src="{% static 'javascript/scroll.js' %}"></script>
 <script src="{% static 'javascript/dropdown.js' %}"></script>
 <script src="{% static 'javascript/reload.js' %}"></script>
 <script src="{% static 'javascript/pop_up.js' %}"></script>
-<script src="{% static 'javascript/erase_history.js' %}"></script>
 </body>
 </html>

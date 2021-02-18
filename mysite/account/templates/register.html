@@ -2,7 +2,7 @@
 {% load static %}
 <head xmlns="http://www.w3.org/1999/html">
     <meta charset="utf-8"/>
-    <title>121</title>
+    <title>Pexels 121</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/register_style.css' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/logo-free.png' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -28,51 +28,48 @@
 
 <div>
     <form method="POST" class="register_form">
-        <h2>Sign up</h2>
+        <h2>회원가입</h2>
         {% csrf_token %}
         <div class="form_id">
             <input type="text"
                    class="id form-control"
                    name="userID"
                    id="id userID"
-                   placeholder="Username">
+                   placeholder="ID">
         </div>
         <div class="form_pw">
             <input type="password"
                    name="userPW"
                    class="pw form-control"
                    id="userPW"
-                   placeholder="Password">
+                   placeholder="PW">
         </div>
         <div class="form_re_pw">
             <input type= "password"
                    class="re_pw form-control"
                    id="re_password"
-                   placeholder="Confirm Password"
+                   placeholder="PW 확인"
                    name = "re_password">
         </div>
         <div class="form_phone">
             <input type= "text"
                    class="phone form-control"
                    id="userPhone"
-                   placeholder="Phone"
+                   placeholder="사용자 Phone"
                    name = "userPhone">
         </div>
         <div class="form_mail">
             <input type= "text"
                    class="mail form-control"
                    id="userMail"
-                   placeholder="Email"
+                   placeholder="사용자 Mail"
                    name = "userMail">
         </div>
         <button type="submit" class="btn btn-primary">
-            Create New Account
+            회원가입
         </button>
-        <br>
-        <span style="color:red;"><strong>{{ error }}</strong> </span>
     </form>
 </div>
 </div>
 </body>
-<script src="{% static 'javascript/secrets.js' %}"></script>
 <script src="{% static 'javascript/register.js' %}"></script>

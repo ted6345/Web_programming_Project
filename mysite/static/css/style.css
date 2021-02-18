@@ -135,7 +135,7 @@ body, html {
 .login {
     position: absolute;
     right: 16px;
-    cursor: pointer;
+
     margin-top: 10px;
     margin-bottom: 10px;
 
@@ -148,17 +148,12 @@ body, html {
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 2px;
-    background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-    background-position: left;
-    background-size: 200%;
+    background-color: rgb(33, 150, 243);
     border-radius: 4px;
     text-align: center;
     vertical-align: middle;
+}
 
-}
-.login:hover {
-    background-position: right;
-}
 
 
 /*hero part*/
@@ -267,7 +262,7 @@ div {
     position: absolute;
     padding: 20px;
     z-index: 10;
-    height: 144px;
+    height: 300px;
     max-height: calc(100vh - 150px);
     width: 650px;
     /*max-height: calc(100vh - 150px);*/
@@ -284,7 +279,7 @@ div {
     left: 170px;
     top: 53.5px;
     padding: 20px;
-    height: 144px;
+    height: 300px;
     max-height: calc(100vh - 150px);
     width: 651px;
     /*max-height: calc(100vh - 150px);*/
@@ -448,31 +443,19 @@ img{
 
 a.btn-layerClose {
     display: inline-block;
+    height: 25px;
     padding: 0 14px 0;
-    /* border: 1px solid #304a8a; */
-    background-color: rgb(33,150,243);
-    text-decoration: none;
-    margin-top: 22px;
-
-
-    width: 80px;
-    height: 40px;
-    line-height: 40px;
-    border: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-    background-position: left;
-    background-size: 200%;
-    border-radius: 4px;
-    text-align: center;
-    vertical-align: middle;
+    border: 1px solid #304a8a;
+    background-color: #3f5a9d;
+    font-size: 13px;
+    color: #fff;
+    line-height: 25px;
 }
 
 a.btn-layerClose:hover {
-    background-position: right;
+    border: 1px solid #091940;
+    background-color: #1f326a;
+    color: #fff;
 }
 
 .layer-popup .btn-r {
@@ -486,10 +469,9 @@ a.btn-layerClose:hover {
 .layer-popup {
     display: none;
     position: absolute;
-    /*border: 5px solid #3571B5;*/
+    border: 5px solid #3571B5;
     background-color: #fff;
     z-index: 10;
-    box-shadow: 0 0 20px 13px #00000042;
 }
 
 .layer-container {
@@ -521,15 +503,4 @@ a.btn-layerClose:hover {
 }
 .pop-img{
     object-fit: contain;
-}
-
-
-.search-bar__dropdown__section__title, .search-bar__dropdown__section__title2 {
-    display: flex;
-}
-.erase_btn, .erase_btn2 {
-    border: none;
-    background: none;
-    margin-bottom: 14px;
-    cursor: pointer;
 }
